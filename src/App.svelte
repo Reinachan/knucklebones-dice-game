@@ -92,33 +92,73 @@
 </script>
 
 <main>
-	{#if !!victoryMessage}
-		<h1>{victoryMessage}</h1>
-	{/if}
-
-	<Player
-		board={player1}
-		setBoard={setPlayer1}
-		{switchTurn}
-		playerNum={PlayerNum.One}
-		active={!!victoryMessage ? false : turn === PlayerNum.One}
-		{attack}
-	/>
-	<Player
-		board={player2}
-		setBoard={setPlayer2}
-		{switchTurn}
-		playerNum={PlayerNum.Two}
-		active={!!victoryMessage ? false : turn === PlayerNum.Two}
-		{attack}
-	/>
+	<h1>Knucklebones</h1>
+	<div class="boards">
+		<Player
+			board={player1}
+			setBoard={setPlayer1}
+			{switchTurn}
+			playerNum={PlayerNum.One}
+			active={!!victoryMessage ? false : turn === PlayerNum.One}
+			{attack}
+		/>
+		{#if !!victoryMessage}
+			<h2>{victoryMessage}</h2>
+		{/if}
+		{#if !victoryMessage}
+			<h2>Player {turn}'s turn</h2>
+		{/if}
+		<Player
+			board={player2}
+			setBoard={setPlayer2}
+			{switchTurn}
+			playerNum={PlayerNum.Two}
+			active={!!victoryMessage ? false : turn === PlayerNum.Two}
+			{attack}
+		/>
+	</div>
 
 	<footer>
 		<a href="https://www.flaticon.com/free-icons/dice" title="dice icons">
-			Dice icons created by Google - Flaticon
+			Dice icons created by<wbr /> Google - Flaticon
 		</a>
+		<p>Game based on Knucklebones from Cult of the Lamb</p>
 	</footer>
 </main>
 
 <style>
+	.boards {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: min-content max-content;
+		grid-template-areas:
+			'victory victory'
+			'player1 player2';
+		gap: 2rem;
+		column-gap: 5rem;
+		width: 100%;
+	}
+
+	h2 {
+		grid-area: victory;
+	}
+
+	h1 {
+		font-size: clamp(1rem, 8.5vw, 4rem);
+	}
+
+	@media screen and (max-width: 650px) {
+		.boards {
+			grid-template-columns: auto;
+			grid-template-rows: auto;
+			grid-template-areas:
+				'player1'
+				'victory'
+				'player2';
+		}
+	}
+
+	footer {
+		margin-top: 5rem;
+	}
 </style>

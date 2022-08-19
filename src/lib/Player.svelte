@@ -41,20 +41,38 @@
 	};
 </script>
 
-<RollDice {dice} {setDice} disabled={!active} />
+<div class={`player p${playerNum}`}>
+	<RollDice {dice} {setDice} disabled={!active} />
 
-<div class="rows">
-	{#each board as row, index}
-		<div class="col">
-			<button
-				disabled={!dice || board[index].length >= 3}
-				on:click={() => addDice(index)}>Add</button
-			>
-			<Row nums={row} value={calculateRowValue(row)} />
-		</div>
-	{/each}
+	<div class="rows">
+		{#each board as row, index}
+			<div class="col">
+				<button
+					disabled={!dice || board[index].length >= 3}
+					on:click={() => addDice(index)}>Add</button
+				>
+				<Row nums={row} value={calculateRowValue(row)} />
+			</div>
+		{/each}
+	</div>
+
+	<div class="total-score">
+		<strong>{valueOfPlayer(board)}</strong>
+	</div>
 </div>
 
-<div class="total-score">
-	<strong>{valueOfPlayer(board)}</strong>
-</div>
+<style>
+	.player {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.p1 {
+		grid-area: player1;
+	}
+
+	.p2 {
+		grid-area: player2;
+	}
+</style>
