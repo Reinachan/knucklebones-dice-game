@@ -114,9 +114,16 @@
 		>
 
 		<footer>
-			<a href="https://www.flaticon.com/free-icons/dice" title="dice icons">
-				Dice icons created by<wbr /> Google - Flaticon
-			</a>
+			<p>
+				<a href="https://github.com/Reinachan/knucklebones-dice-game"
+					>Source code</a
+				> is available on GitHub!
+			</p>
+			<p>
+				<a href="https://www.flaticon.com/free-icons/dice" title="dice icons">
+					Dice icons created by<wbr /> Google - Flaticon
+				</a>
+			</p>
 			<p>Game based on Knucklebones from Cult of the Lamb</p>
 		</footer>
 	{/if}
