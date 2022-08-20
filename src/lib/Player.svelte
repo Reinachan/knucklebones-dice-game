@@ -55,10 +55,6 @@
 			</div>
 		{/each}
 	</div>
-
-	<div class="total-score">
-		<strong>{valueOfPlayer(board)}</strong>
-	</div>
 </div>
 
 <style>

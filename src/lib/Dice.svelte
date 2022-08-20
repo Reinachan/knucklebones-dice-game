@@ -32,3 +32,17 @@
 {#if die === 6}
 	<img src={dice6} alt="dice 6" class="dice" />
 {/if}
+
+<style>
+	.dice {
+		width: 2rem;
+		height: 2rem;
+		margin: auto;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.dice {
+			filter: invert();
+		}
+	}
+</style>
