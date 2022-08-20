@@ -100,9 +100,9 @@
 		<h1>Knucklebones</h1>
 
 		<h2>Rules</h2>
-		<p>Multiple dice of the same value on the same row gets multiplied.</p>
+		<p>Multiple dice of the same value on the same column gets multiplied.</p>
 		<p>
-			Placing a dice of the same value on the same row as your opponent will
+			Placing a dice of the same value on the same column as your opponent will
 			destroy their dice.
 		</p>
 		<p>When a player fills their board, the player with the most points win.</p>
