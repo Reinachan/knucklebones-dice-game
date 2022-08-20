@@ -12,6 +12,8 @@
 
 	let turn = PlayerNum.Start;
 
+	let mobileMode = false;
+
 	let victoryMessage = null;
 
 	const switchTurn = (nextTurn: PlayerNum) => {
@@ -97,35 +99,45 @@
 
 <main>
 	{#if turn === PlayerNum.Start}
-		<h1>Knucklebones</h1>
+		<div class="info">
+			<h1>Knucklebones</h1>
 
-		<h2>Rules</h2>
-		<p>Multiple dice of the same value on the same column gets multiplied.</p>
-		<p>
-			Placing a dice of the same value on the same column as your opponent will
-			destroy their dice.
-		</p>
-		<p>When a player fills their board, the player with the most points win.</p>
-		<br />
-		<button
-			on:click={() => {
-				turn = PlayerNum.One;
-			}}>Start Game</button
-		>
-
-		<footer>
+			<h2>Rules</h2>
+			<p>Multiple dice of the same value on the same column gets multiplied.</p>
 			<p>
-				<a href="https://github.com/Reinachan/knucklebones-dice-game"
-					>Source code</a
-				> is available on GitHub!
+				Placing a dice of the same value on the same column as your opponent
+				will destroy their dice.
 			</p>
 			<p>
-				<a href="https://www.flaticon.com/free-icons/dice" title="dice icons">
-					Dice icons created by<wbr /> Google - Flaticon
-				</a>
+				When a player fills their board, the player with the most points win.
 			</p>
-			<p>Game based on Knucklebones from Cult of the Lamb</p>
-		</footer>
+			<br />
+			<button
+				on:click={() => {
+					turn = PlayerNum.One;
+				}}>Start Game Desktop</button
+			>
+			<button
+				on:click={() => {
+					mobileMode = true;
+					turn = PlayerNum.One;
+				}}>Start Game Mobile</button
+			>
+
+			<footer>
+				<p>
+					<a href="https://github.com/Reinachan/knucklebones-dice-game"
+						>Source code</a
+					> is available on GitHub!
+				</p>
+				<p>
+					<a href="https://www.flaticon.com/free-icons/dice" title="dice icons">
+						Dice icons created by<wbr /> Google - Flaticon
+					</a>
+				</p>
+				<p>Game based on Knucklebones from Cult of the Lamb</p>
+			</footer>
+		</div>
 	{/if}
 	{#if turn !== PlayerNum.Start}
 		<div class="boards">
@@ -136,6 +148,7 @@
 				playerNum={PlayerNum.One}
 				active={!!victoryMessage ? false : turn === PlayerNum.One}
 				{attack}
+				mobile={mobileMode}
 			/>
 			{#if turn !== PlayerNum.End}
 				<h2>Player {turn}'s turn</h2>
@@ -152,6 +165,7 @@
 				playerNum={PlayerNum.Two}
 				active={!!victoryMessage ? false : turn === PlayerNum.Two}
 				{attack}
+				mobile={false}
 			/>
 		</div>
 	{/if}
@@ -174,11 +188,21 @@
 		grid-area: turn;
 	}
 
+	@media screen and (max-height: 900px) {
+		h2 {
+			margin: 5px;
+		}
+	}
+
 	h1 {
 		font-size: clamp(1rem, 8.5vw, 4rem);
 	}
 
 	footer {
 		margin-top: 5rem;
+	}
+
+	.info {
+		padding: 0.3rem;
 	}
 </style>

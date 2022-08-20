@@ -13,6 +13,8 @@
 	export let switchTurn: (currentPlayer: PlayerNum) => void;
 	export let attack: (dice: number, row: number, attacker: PlayerNum) => void;
 
+	export let mobile: undefined | boolean;
+
 	export let active: boolean;
 
 	let dice: number | null = null;
@@ -41,13 +43,12 @@
 	};
 </script>
 
-<div class={`player p${playerNum}`}>
-	<RollDice {dice} {setDice} disabled={!active} />
-
+<div class={`player p${playerNum}${mobile ? ' mobile' : ''}`}>
 	<div class="rows">
 		{#each board as row, index}
 			<div class="col">
 				<button
+					class="addButton"
 					disabled={!dice || board[index].length >= 3}
 					on:click={() => addDice(index)}>Add</button
 				>
@@ -55,6 +56,8 @@
 			</div>
 		{/each}
 	</div>
+
+	<RollDice {dice} {setDice} disabled={!active} />
 </div>
 
 <style>
@@ -70,5 +73,9 @@
 
 	.p2 {
 		grid-area: player2;
+	}
+
+	.mobile {
+		transform: rotate(180deg);
 	}
 </style>

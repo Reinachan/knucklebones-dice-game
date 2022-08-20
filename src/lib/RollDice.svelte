@@ -25,6 +25,7 @@
 
 <style>
 	.roll-dice {
-		margin-bottom: 1.5rem;
+		margin-top: 0.8rem;
+		height: 2rem;
 	}
 </style>
