@@ -28,12 +28,16 @@
 	.roll-dice {
 		margin-top: 0.8rem;
 		margin-bottom: 0.8rem;
-		height: 2rem;
+		height: 2.5rem;
+
+		display: flex;
+		align-items: center;
+		align-content: center;
 	}
 
 	.roll-dice button {
-		height: 2rem;
-		width: 6rem;
+		height: 2.5rem;
+		width: 7rem;
 	}
 
 	.rotate {
