@@ -39,3 +39,21 @@
 		<p>Game based on Knucklebones from Cult of the Lamb</p>
 	</footer>
 </div>
+
+<style>
+	h1 {
+		font-size: clamp(1rem, 8.5vw, 4rem);
+	}
+
+	footer {
+		margin-top: 5rem;
+	}
+
+	.info {
+		padding: 0.3rem;
+	}
+
+	button {
+		padding: 0.6em 1.2em;
+	}
+</style>

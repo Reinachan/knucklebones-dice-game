@@ -172,16 +172,4 @@
 			margin: 5px;
 		}
 	}
-
-	h1 {
-		font-size: clamp(1rem, 8.5vw, 4rem);
-	}
-
-	footer {
-		margin-top: 5rem;
-	}
-
-	.info {
-		padding: 0.3rem;
-	}
 </style>

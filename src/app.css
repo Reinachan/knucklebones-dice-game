@@ -51,7 +51,6 @@ h1 {
 button {
 	border-radius: 8px;
 	border: 1px solid transparent;
-	padding: 0.6em 1.2em;
 	font-size: 1em;
 	font-weight: 500;
 	font-family: inherit;
@@ -91,7 +90,7 @@ button:disabled {
 
 .col {
 	display: grid;
-	grid-template-rows: 2rem repeat(3, 3rem);
+	grid-template-rows: 2rem repeat(3, 3rem) 2rem;
 	gap: 1rem;
 	grid-template-areas:
 		'value'
@@ -99,6 +98,7 @@ button:disabled {
 		'dice'
 		'dice'
 		'addButton';
+	justify-content: center;
 }
 
 .col.upside-down {
@@ -109,6 +109,11 @@ button:disabled {
 		'dice'
 		'dice'
 		'value';
+}
+
+.col > button {
+	width: 4rem;
+	height: 2rem;
 }
 
 @media screen and (max-height: 900px) {

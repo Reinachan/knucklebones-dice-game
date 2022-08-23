@@ -97,7 +97,7 @@
 		flex-direction: column;
 		align-items: center;
 		border-radius: 5px;
-		padding: 8px 12px 8px 8px;
+		padding: 8px 8px 8px 8px;
 	}
 
 	.p1 {

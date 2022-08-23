@@ -30,6 +30,12 @@
 		margin-bottom: 0.8rem;
 		height: 2rem;
 	}
+
+	.roll-dice button {
+		height: 2rem;
+		width: 6rem;
+	}
+
 	.rotate {
 		transform: rotate(180deg);
 	}
