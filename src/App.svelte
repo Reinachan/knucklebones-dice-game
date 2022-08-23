@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { validate_each_argument } from 'svelte/internal';
 	import calculateRowValue from './helpers/calculateRowValue';
+	import randNumberRange from './helpers/randNumberRange';
+	import Info from './lib/Info.svelte';
 
 	import Player from './lib/Player.svelte';
 
@@ -15,6 +17,7 @@
 	let mobileMode = false;
 
 	let victoryMessage = null;
+	let victor = null;
 
 	const switchTurn = (nextTurn: PlayerNum) => {
 		switch (nextTurn) {
@@ -45,9 +48,11 @@
 			}
 			if (p1Value > p2Value) {
 				victoryMessage = `Player 1 wins ${p1Value}x${p2Value}`;
+				victor = PlayerNum.Start;
 			}
 			if (p1Value < p2Value) {
 				victoryMessage = `Player 2 wins ${p2Value}x${p1Value}`;
+				victor = PlayerNum.Two;
 			}
 			turn = PlayerNum.End;
 		}
@@ -95,49 +100,20 @@
 			}
 		}
 	};
+
+	const start = () => {
+		turn = randNumberRange(1, 2);
+	};
+
+	const startMobileMode = () => {
+		mobileMode = true;
+		start();
+	};
 </script>
 
 <main>
 	{#if turn === PlayerNum.Start}
-		<div class="info">
-			<h1>Knucklebones</h1>
-
-			<h2>Rules</h2>
-			<p>Multiple dice of the same value on the same column gets multiplied.</p>
-			<p>
-				Placing a dice of the same value on the same column as your opponent
-				will destroy their dice.
-			</p>
-			<p>
-				When a player fills their board, the player with the most points win.
-			</p>
-			<br />
-			<button
-				on:click={() => {
-					turn = PlayerNum.One;
-				}}>Start Game Desktop</button
-			>
-			<button
-				on:click={() => {
-					mobileMode = true;
-					turn = PlayerNum.One;
-				}}>Start Game Mobile</button
-			>
-
-			<footer>
-				<p>
-					<a href="https://github.com/Reinachan/knucklebones-dice-game"
-						>Source code</a
-					> is available on GitHub!
-				</p>
-				<p>
-					<a href="https://www.flaticon.com/free-icons/dice" title="dice icons">
-						Dice icons created by<wbr /> Google - Flaticon
-					</a>
-				</p>
-				<p>Game based on Knucklebones from Cult of the Lamb</p>
-			</footer>
-		</div>
+		<Info {start} {startMobileMode} />
 	{/if}
 	{#if turn !== PlayerNum.Start}
 		<div class="boards">
@@ -149,6 +125,7 @@
 				active={!!victoryMessage ? false : turn === PlayerNum.One}
 				{attack}
 				mobile={mobileMode}
+				victor={victor === PlayerNum.One}
 			/>
 			{#if turn !== PlayerNum.End}
 				<h2>Player {turn}'s turn</h2>
@@ -166,6 +143,7 @@
 				active={!!victoryMessage ? false : turn === PlayerNum.Two}
 				{attack}
 				mobile={false}
+				victor={victor === PlayerNum.Two}
 			/>
 		</div>
 	{/if}
@@ -186,6 +164,7 @@
 
 	h2 {
 		grid-area: turn;
+		margin: 0;
 	}
 
 	@media screen and (max-height: 900px) {

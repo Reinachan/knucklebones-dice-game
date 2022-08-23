@@ -15,7 +15,10 @@
 
 	export let mobile: undefined | boolean;
 
+	/** is this component the current turn's player? */
 	export let active: boolean;
+	/** is this component the winner? */
+	export let victor: boolean | null;
 
 	let dice: number | null = null;
 	const setDice = (newValue: number) => {
@@ -43,28 +46,58 @@
 	};
 </script>
 
-<div class={`player p${playerNum}${mobile ? ' mobile' : ''}`}>
-	<div class="rows">
-		{#each board as row, index}
-			<div class="col">
-				<button
-					class="addButton"
-					disabled={!dice || board[index].length >= 3}
-					on:click={() => addDice(index)}>Add</button
-				>
-				<Row nums={row} value={calculateRowValue(row)} />
-			</div>
-		{/each}
-	</div>
+{#if !mobile}
+	<div
+		class={`player p${playerNum}${mobile ? ' mobile' : ''}${
+			active ? ' current' : ''
+		}${victor ? ' victor' : ''}`}
+	>
+		<div class="rows">
+			{#each board as row, index}
+				<div class="col">
+					<button
+						class="addButton"
+						disabled={!dice || board[index].length >= 3}
+						on:click={() => addDice(index)}>Add</button
+					>
+					<Row nums={row} value={calculateRowValue(row)} />
+				</div>
+			{/each}
+		</div>
 
-	<RollDice {dice} {setDice} disabled={!active} />
-</div>
+		<RollDice {dice} {setDice} disabled={!active} rotate={false} />
+	</div>
+{/if}
+{#if mobile}
+	<div
+		class={`player p${playerNum}${mobile ? ' mobile' : ''}${
+			active ? ' current' : ''
+		}${victor ? ' victor' : ''}`}
+	>
+		<RollDice {dice} {setDice} disabled={!active} rotate={true} />
+
+		<div class="rows">
+			{#each board as row, index}
+				<div class="col upside-down">
+					<Row nums={row} value={calculateRowValue(row)} rotate={true} />
+					<button
+						class="addButton rotate"
+						disabled={!dice || board[index].length >= 3}
+						on:click={() => addDice(index)}>Add</button
+					>
+				</div>
+			{/each}
+		</div>
+	</div>
+{/if}
 
 <style>
 	.player {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		border-radius: 5px;
+		padding: 8px 12px 8px 8px;
 	}
 
 	.p1 {
@@ -75,7 +108,21 @@
 		grid-area: player2;
 	}
 
-	.mobile {
+	.rotate {
 		transform: rotate(180deg);
 	}
+
+	.current:not(.victor) {
+		outline: rgba(68, 185, 228, 0.268) solid 2px;
+		background-color: rgba(68, 185, 228, 0.058);
+	}
+
+	.victor {
+		outline: rgba(79, 231, 68, 0.693) solid 2px;
+		background-color: rgba(79, 231, 68, 0.381);
+	}
+
+	/* .mobile {
+		transform: rotate(180deg);
+	} */
 </style>

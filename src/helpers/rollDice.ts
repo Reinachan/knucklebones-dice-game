@@ -1,5 +1,7 @@
+import randNumberRange from './randNumberRange';
+
 const rollDice = () => {
-	return Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+	return randNumberRange(1, 6);
 };
 
 export default rollDice;

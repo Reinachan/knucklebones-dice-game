@@ -101,6 +101,16 @@ button:disabled {
 		'addButton';
 }
 
+.col.upside-down {
+	grid-template-rows: repeat(3, 3rem) 2rem;
+	grid-template-areas:
+		'addButton'
+		'dice'
+		'dice'
+		'dice'
+		'value';
+}
+
 @media screen and (max-height: 900px) {
 	.rows {
 		grid-template-columns: repeat(3, 3.7rem);
