@@ -48,7 +48,7 @@
 			}
 			if (p1Value > p2Value) {
 				victoryMessage = `Player 1 wins ${p1Value}x${p2Value}`;
-				victor = PlayerNum.Start;
+				victor = PlayerNum.One;
 			}
 			if (p1Value < p2Value) {
 				victoryMessage = `Player 2 wins ${p2Value}x${p1Value}`;
@@ -134,6 +134,12 @@
 				<h2>
 					{victoryMessage}
 				</h2>
+				<button
+					class="restart"
+					on:click={(_) => {
+						window.location.reload();
+					}}>Restart</button
+				>
 			{/if}
 			<Player
 				board={player2}
@@ -171,5 +177,10 @@
 		h2 {
 			margin: 5px;
 		}
+	}
+
+	.restart {
+		background-color: #4f54b5;
+		height: 2.5rem;
 	}
 </style>

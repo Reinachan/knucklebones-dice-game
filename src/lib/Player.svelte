@@ -48,9 +48,9 @@
 
 {#if !mobile}
 	<div
-		class={`player p${playerNum}${mobile ? ' mobile' : ''}${
-			active ? ' current' : ''
-		}${victor ? ' victor' : ''}`}
+		class={`player p${playerNum}${active ? ' current' : ''}${
+			victor ? ' victor' : ''
+		}`}
 	>
 		<div class="rows">
 			{#each board as row, index}
@@ -70,9 +70,9 @@
 {/if}
 {#if mobile}
 	<div
-		class={`player p${playerNum}${mobile ? ' mobile' : ''}${
-			active ? ' current' : ''
-		}${victor ? ' victor' : ''}`}
+		class={`player mobile p${playerNum}${active ? ' current' : ''}${
+			victor ? ' victor' : ''
+		}`}
 	>
 		<RollDice {dice} {setDice} disabled={!active} rotate={true} />
 
